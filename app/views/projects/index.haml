@@ -1,0 +1,5 @@
+%h1 projects#index
+
+- @projects.each do |project|
+  %div
+    = link_to project.name, project_path(project)
