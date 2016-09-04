@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   
   # GET /projects/:id
   def show
-    @project = Project.find(params[:id])
+    @project = set_project
   end
   
   # GET /projects/new
@@ -25,8 +25,17 @@ class ProjectsController < ApplicationController
     end
   end
   
+  # GET /projects/:id/edit
+  def edit
+    @project = set_project
+  end
+  
   private
     def project_params
       params.require(:project).permit(:name, :description)
+    end
+    
+    def set_project
+      Project.find(params[:id])
     end
 end
