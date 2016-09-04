@@ -1,15 +1,11 @@
 module ApplicationHelper
-  def show_error_message_for_form(object)
+  def get_error_message(object)
     if object.errors.any?
-      "Oops, form contains #{pluralize(object.errors.count, 'error')}. " +
-      "Please fix and try again."
+      "Please fix the form errors before continuing."
     end
   end
-  def show_error_messages_for_field(object, field)
-    if object.errors.any?
-      if object.errors.messages[field].any?
-        object.errors.messages[field].to_sentence.upcase_first + "."
-      end
-    end
+  def get_error_message_for(object, field)
+    message = object.errors.full_messages_for(field).first
+    "Error: #{message}." if message
   end
 end
