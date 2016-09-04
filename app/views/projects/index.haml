@@ -1,5 +1,8 @@
 %h1 projects#index
 
+%div= link_to "New", new_project_path
+
 - @projects.each do |project|
-  %div
-    = link_to project.name, project_path(project)
+  %div<
+    %div= project.name
+    %div= link_to "Show", project_path(project)
