@@ -1,3 +1,4 @@
-%h1 projects#new
+- content_for(:title) { 'Create Project' }
+- content_for(:subtitle) { 'projects#new' }
 
 = render partial: 'form', locals: {project: @project}
