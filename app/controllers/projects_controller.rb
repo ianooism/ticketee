@@ -39,6 +39,13 @@ class ProjectsController < ApplicationController
     end
   end
   
+  # DELETE /projects/:id
+  def destroy
+    @project = set_project
+    @project.destroy
+    redirect_to projects_url, notice: "Project successfully destroyed."
+  end
+  
   private
     def project_params
       params.require(:project).permit(:name, :description)
