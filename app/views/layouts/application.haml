@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Ticketee
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+  %body
+    - if notice
+      %div= notice
+    = yield :error_message
+    = yield

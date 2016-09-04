@@ -1,10 +1,14 @@
+- content_for :error_message do
+  %div= show_error_message_for_form(@project)
+
 %h1 projects#new
 
 = form_for @project do |f|
   %div<
-    = f.label :name
-    = f.text_field :name
+    %div= f.label :name
+    %div= f.text_field :name
+    %div= show_error_messages_for_field(@project, :name)
   %div<
-    = f.label :description
-    = f.text_field :description
+    %div= f.label :description
+    %div= f.text_field :description
   %div= f.submit
