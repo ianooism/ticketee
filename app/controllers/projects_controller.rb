@@ -18,8 +18,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      redirect_to project_url(@project),
-        notice: "#{Project.model_name.human} successfully created."
+      redirect_to project_url(@project), notice: "Project successfully created."
     else
       render 'new'
     end
@@ -28,6 +27,16 @@ class ProjectsController < ApplicationController
   # GET /projects/:id/edit
   def edit
     @project = set_project
+  end
+  
+  # PATCH or PUT /projects/:id
+  def update
+    @project = set_project
+    if @project.update(project_params)
+      redirect_to project_url(@project), notice: "Project successfully updated."
+    else
+      render 'edit'
+    end
   end
   
   private
