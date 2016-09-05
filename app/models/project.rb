@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
-  validates :name, presence: true, length: { minimum: 2 }
+  has_many :tickets
+  
+  validates :name, presence: true, uniqueness: true
   validates :description, presence: true
 end
