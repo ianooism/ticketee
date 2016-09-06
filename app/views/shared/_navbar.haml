@@ -1,0 +1,7 @@
+- if !user_signed_in?
+  - if current_page?(controller: 'devise/sessions', action: 'new')
+    %div= link_to 'Sign Up', new_user_registration_path
+  - else
+    %div= link_to 'Sign In', new_user_session_path
+- else
+  %div= link_to 'Sign Out', destroy_user_session_path, method: :delete

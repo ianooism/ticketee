@@ -9,5 +9,6 @@
     - if notice || alert
       %div= notice ? notice : alert
     = yield :form_error
+    = render partial: 'shared/navbar'
     = render partial: 'shared/page_title'
     = yield
