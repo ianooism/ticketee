@@ -1,0 +1,13 @@
+- content_for :form_error do
+  %div= get_error_message(ticket)
+
+= form_for [project, ticket] do |f|
+  %div<
+    %div= f.label :name
+    %div= f.text_field :name
+    %div= get_error_message_for(ticket, :name)
+  %div<
+    %div= f.label :description
+    %div= f.text_field :description
+    %div= get_error_message_for(ticket, :description)
+  %div= f.submit

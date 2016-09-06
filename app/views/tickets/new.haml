@@ -1,0 +1,4 @@
+- content_for(:title) { 'New Ticket' }
+- content_for(:subtitle) { 'tickets#new' }
+
+= render partial: 'form', locals: {project: @project, ticket: @ticket}
