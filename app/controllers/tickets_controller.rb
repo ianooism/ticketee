@@ -1,15 +1,14 @@
 class TicketsController < ApplicationController
+  before_action :set_project
+  before_action :set_ticket, except: [:new, :create]
+  
   def show
-    @project = set_project
-    @ticket = set_ticket
   end
   
   def new
-    @project = set_project
     @ticket = @project.tickets.new
   end
   def create
-    @project = set_project
     @ticket = @project.tickets.create(ticket_params)
     if @ticket.save
       redirect_to project_path(@project),
@@ -20,12 +19,8 @@ class TicketsController < ApplicationController
   end
   
   def edit
-    @project = set_project
-    @ticket = set_ticket
   end
   def update
-    @project = set_project
-    @ticket = set_ticket
     if @ticket.update(ticket_params)
       redirect_to project_path(@project),
         notice: 'Ticket successfully updated.'
@@ -35,8 +30,6 @@ class TicketsController < ApplicationController
   end
   
   def destroy
-    @project = set_project
-    @ticket = set_ticket
     @ticket.destroy
     redirect_to project_path(@project),
       notice: 'Ticket successfully destroyed.'
@@ -44,10 +37,10 @@ class TicketsController < ApplicationController
   
   private
     def set_project
-      Project.find(params[:project_id])
+      @project = Project.find(params[:project_id])
     end
     def set_ticket
-      @project.tickets.find(params[:id])
+      @ticket = @project.tickets.find(params[:id])
     end
     
     def ticket_params
