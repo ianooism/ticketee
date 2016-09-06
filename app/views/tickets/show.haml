@@ -1,0 +1,6 @@
+- content_for(:title) { @ticket.name.upcase_first }
+- content_for(:subtitle) { 'tickets#show' }
+
+%div<
+  %div= @ticket.name
+  %div= @ticket.description
