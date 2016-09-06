@@ -1,19 +1,19 @@
-- content_for(:title) { 'Sign In' }
+- content_for(:title) { 'Sign in' }
 
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   %div<
     %div= f.label :email
-    %div= f.email_field :email
+    %div= f.email_field :email, tabindex: 1
 
   %div<
     %div<
       = f.label :password
-      %span= link_to 'Forgot?', new_user_password_path
-    %div= f.email_field :password, autocomplete: 'off'
+      %span= link_to 'Forgot?', new_user_password_path, tabindex: 2
+    %div= f.password_field :password, autocomplete: 'off', tabindex: 1
 
   - if devise_mapping.rememberable?
     %div<
-      = f.check_box :remember_me
+      = f.check_box :remember_me, checked: true, tabindex: 1
       = f.label :remember_me
 
-  %div= f.submit 'Sign In'
+  %div= f.submit 'Sign In', tabindex: 1

@@ -1,3 +1,4 @@
+%div= link_to 'Home', root_path
 - if !user_signed_in?
   - if current_page?('/users/sign_in')
     %div= link_to 'Sign Up', new_user_registration_path
