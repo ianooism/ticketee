@@ -8,7 +8,12 @@
 
   %div<
     %div= f.label :password
-    %div= f.password_field :password, autocomplete: 'off'
+    %div= f.password_field :password, autocomplete: 'off', placeholder: 'At least 6 characters'
     %div= get_error_message_for(resource, :password)
+    
+  %div<
+    %div= f.label :password_confirmation
+    %div= f.password_field :password_confirmation, autocomplete: 'off'
+    %div= get_error_message_for(resource, :password_confirmation)
 
   %div= f.submit 'Sign Up'
