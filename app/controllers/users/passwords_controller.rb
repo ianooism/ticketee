@@ -10,6 +10,7 @@ class Users::PasswordsController < Devise::RegistrationsController
   def update
     @user = User.find(current_user.id)
     if @user.update_with_password(user_params)
+      set_flash_message :notice, :updated_password
       bypass_sign_in @user
       redirect_to root_path
     else
