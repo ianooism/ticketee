@@ -1,4 +1,4 @@
-class Account::PasswordsController < ApplicationController
+class Users::PasswordsController < DeviseController
   before_action :authenticate_user!
   
   # GET /account/password/edit

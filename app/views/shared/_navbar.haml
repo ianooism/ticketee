@@ -6,6 +6,6 @@
     %div= link_to 'Sign In', new_user_session_path
 - else
   %div #{current_user.email}
-  %div= link_to 'Change email', edit_account_email_path
-  %div= link_to 'Change password', edit_account_password_path
+  %div= link_to 'Change email', edit_user_email_path
+  %div= link_to 'Change password', edit_user_password_path
   %div= link_to 'Sign Out', destroy_user_session_path, method: :delete

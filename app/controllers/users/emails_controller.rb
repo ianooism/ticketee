@@ -1,4 +1,4 @@
-class Account::EmailsController < ApplicationController
+class Users::EmailsController < DeviseController
   before_action :authenticate_user!
   
   # GET /account/email/edit
