@@ -1,18 +1,19 @@
-class Users::PasswordsController < DeviseController
+class Users::PasswordsController < Devise::RegistrationsController
   before_action :authenticate_user!
   
-  # GET /account/password/edit
+  # GET /users/password/edit
   def edit
     @user = current_user
   end
   
-  # POST /account/password
+  # POST /users/password
   def update
     @user = User.find(current_user.id)
     if @user.update_with_password(user_params)
       bypass_sign_in @user
       redirect_to root_path
     else
+      clean_up_passwords @user
       render 'edit'
     end
   end
