@@ -1,16 +1,16 @@
 - content_for(:title) { 'Change password' }
 
-= form_for(@user, url: {action: 'update'}) do |f|
+= form_for(resource, url: {action: 'update'}) do |f|
   %div<
     %div= f.label :password
     %div= f.password_field :password, autocomplete: 'off', placeholder: 'At least 6 characters'
-    %div= get_error_message_for(@user, :password)
+    %div= get_error_message_for(resource, :password)
   %div<
     %div= f.label :password_confirmation
     %div= f.password_field :password_confirmation, autocomplete: 'off'
-    %div= get_error_message_for(@user, :password_confirmation)
+    %div= get_error_message_for(resource, :password_confirmation)
   %div<
     %div= f.label :current_password
     %div= f.password_field :current_password, autocomplete: 'off'
-    %div= get_error_message_for(@user, :current_password)
+    %div= get_error_message_for(resource, :current_password)
   %div= f.submit 'Update password'

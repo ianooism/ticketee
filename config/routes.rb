@@ -7,17 +7,12 @@ Rails.application.routes.draw do
   
   devise_for :users, skip: [:registrations, :passwords]
   devise_scope :user do
-    resource :registration,
-      as: 'user_registration',
-      only: [:new, :create],
-      path: 'users',
-      controller: 'devise/registrations'
-    resource :password,
+    resource :password, only: [:new, :create, :edit, :update],
       as: 'user_password_reset',
-      only: [:new, :create, :edit, :update],
       path: 'users/password_reset',
       controller: 'devise/passwords'
     namespace :users, as: 'user' do
+      resource :registration, only: [:new, :create]
       resource :email, only: [:edit, :update]
       resource :password, only: [:edit, :update]
     end
