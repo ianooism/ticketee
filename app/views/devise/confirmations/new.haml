@@ -1,0 +1,8 @@
+- content_for(:title) { 'Confirm your email' }
+
+= form_for(resource, as: resource_name, url: confirmation_path(resource_name), method: :post) do |f|
+  %div<
+    %div= f.label :email
+    %div= f.email_field :email
+    %div= get_error_message_for(resource, :email)
+  %div= f.submit 'Send confirmation instructions'
