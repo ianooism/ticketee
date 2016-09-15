@@ -14,5 +14,3 @@
       = f.check_box :remember_me, checked: true, tabindex: 1
       = f.label :remember_me
   %div= f.submit 'Sign In', tabindex: 1
-  - if devise_mapping.confirmable?
-    = link_to 'Didn’t get confirmation email?', new_confirmation_path(resource_name)

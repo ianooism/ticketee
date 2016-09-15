@@ -6,8 +6,10 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   %body
+    - if devise_controller?
+      %div Errors: #{resource.errors.full_messages}
     - if notice || alert
-      %div= notice ? notice : alert
+      %div= notice ? notice.html_safe : alert.html_safe
     = yield :form_error
     = render partial: 'shared/navbar'
     = render partial: 'shared/page_title'
