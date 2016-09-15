@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+  
   # POST /resource
   def create
     super
@@ -7,4 +9,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         email: resource.email
     end
   end
+  
+  protected
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name])
+    end
 end
