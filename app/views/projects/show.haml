@@ -2,13 +2,17 @@
 - content_for(:subtitle) { 'projects#show' }
 
 %div= link_to "New Ticket", new_project_ticket_path(@project)
+%hr
 
 %div<
   %div= @project.name
   %div= @project.description
+  %hr
   - @project.tickets.each do |ticket|
-    %div= ticket.name
-    %div= ticket.description
-    %div= link_to 'Show', project_ticket_path(@project, ticket)
-    %div= link_to 'Edit', edit_project_ticket_path(@project, ticket)
-    %div= link_to 'Destroy', project_ticket_path(@project, ticket), method: :delete
+    %div<
+      %div= ticket.name
+      %div= ticket.description
+      %div= link_to 'Show', project_ticket_path(@project, ticket)
+      %div= link_to 'Edit', edit_project_ticket_path(@project, ticket)
+      %div= link_to 'Destroy', project_ticket_path(@project, ticket), method: :delete
+    %hr

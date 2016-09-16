@@ -1,12 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  
-  before_action :set_project, only: [:show, :edit, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
   
   def index
     @projects = Project.all
   end
-  
+ 
   def show
   end
   
@@ -14,24 +13,21 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
   
+  def edit
+  end
+  
   def create
     @project = Project.new(project_params)
     if @project.save
-      redirect_to projects_url,
-        notice: "Project successfully created."
+      redirect_to projects_url, notice: "Project created."
     else
       render 'new'
     end
   end
   
-  def edit
-  end
-  
   def update
-    @project = set_project
     if @project.update(project_params)
-      redirect_to projects_url,
-        notice: "Project successfully updated."
+      redirect_to edit_project_url(@project), notice: "Project updated."
     else
       render 'edit'
     end
@@ -39,16 +35,16 @@ class ProjectsController < ApplicationController
   
   def destroy
     @project.destroy
-    redirect_to projects_url,
-      notice: "Project successfully destroyed."
+    redirect_to projects_url, notice: "Project destroyed."
   end
   
   private
-    def project_params
-      params.require(:project).permit(:name, :description)
-    end
-    
+  
     def set_project
       @project = Project.find(params[:id])
+    end
+    
+    def project_params
+      params.require(:project).permit(:name, :description)
     end
 end

@@ -2,6 +2,7 @@
 - content_for(:subtitle) { 'projects#index' }
 
 %div= link_to "New Project", new_project_path
+%hr
 
 - @projects.each do |project|
   %div<
@@ -9,3 +10,4 @@
     %div= link_to "Show", project_path(project)
     %div= link_to "Edit", edit_project_path(project)
     %div= link_to "Destroy", project_path(project), method: :delete
+  %hr

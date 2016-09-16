@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_project
-  before_action :set_ticket, except: [:new, :create]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   
   def show
   end
@@ -8,22 +8,22 @@ class TicketsController < ApplicationController
   def new
     @ticket = @project.tickets.new
   end
+  
+  def edit
+  end
+  
   def create
-    @ticket = @project.tickets.create(ticket_params)
+    @ticket = @project.tickets.new(ticket_params)
     if @ticket.save
-      redirect_to project_path(@project),
-        notice: 'Ticket successfully created.'
+      redirect_to project_url(@project), notice: 'Ticket created.'
     else
       render 'new'
     end
   end
   
-  def edit
-  end
   def update
     if @ticket.update(ticket_params)
-      redirect_to project_path(@project),
-        notice: 'Ticket successfully updated.'
+      redirect_to edit_project_ticket_url(@project, @ticket), notice: 'Ticket updated.'
     else
       render 'edit'
     end
@@ -31,14 +31,15 @@ class TicketsController < ApplicationController
   
   def destroy
     @ticket.destroy
-    redirect_to project_path(@project),
-      notice: 'Ticket successfully destroyed.'
+    redirect_to project_url(@project), notice: 'Ticket destroyed.'
   end
   
   private
+  
     def set_project
       @project = Project.find(params[:project_id])
     end
+  
     def set_ticket
       @ticket = @project.tickets.find(params[:id])
     end
