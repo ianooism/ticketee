@@ -2,17 +2,17 @@ class Users::EmailsController < DeviseController
   before_action :set_user
   
   def edit
+    resource.email = nil
   end
   
   def update
-    previous_unconfirmed_email = resource.unconfirmed_email
-    resource.update(unconfirmed_email: nil)
     if resource.update_with_password(user_params)
+      resource.update(unconfirmed_email: nil) if update_using_current_email?
       bypass_sign_in resource
-      flash_key = update_needs_confirmation?(previous_unconfirmed_email) ?
+      flash_key = resource.pending_reconfirmation? ?
         :update_email_needs_confirmation : :updated_email
       set_flash_message :notice, flash_key
-      redirect_to edit_user_email_url
+      redirect_to action: 'edit'
     else
       render 'edit'
     end
@@ -21,18 +21,18 @@ class Users::EmailsController < DeviseController
   protected
   
     def set_user
+      # devise requirement. resource() requires @user to be set
       @user = current_user
     end
   
     def user_params
       params.require(:user).permit(:email, :current_password)
     end
-  
-    def update_needs_confirmation?(previous_unconfirmed_email)
-      resource.pending_reconfirmation? &&
-        previous_unconfirmed_email != resource.unconfirmed_email
+
+    def update_using_current_email?
+      params[:user][:email] == resource.email
     end
-    
+
     def translation_scope
       'devise.registrations'
     end

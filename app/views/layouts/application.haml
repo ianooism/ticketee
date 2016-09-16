@@ -6,8 +6,8 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   %body
-    - if devise_controller?
-      %div Errors: #{resource.errors.full_messages}
+    - if devise_controller? && resource.errors.any?
+      %div Errors: #{resource.errors.messages}
     - if notice || alert
       %div= notice ? notice.html_safe : alert.html_safe
     = yield :form_error

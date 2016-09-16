@@ -13,7 +13,7 @@ class Users::PasswordsController < DeviseController
     if resource.update_with_password(user_params)
       bypass_sign_in resource
       set_flash_message :notice, :updated_password
-      redirect_to edit_user_password_url
+      redirect_to action: 'edit'
     else
       render 'edit'
     end
@@ -22,6 +22,7 @@ class Users::PasswordsController < DeviseController
   protected
   
     def set_user
+      # devise requirement. resource() requires @user to be set
       @user = current_user
     end
     

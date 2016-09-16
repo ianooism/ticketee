@@ -1,11 +1,14 @@
-- content_for(:title) { 'Change email' }
+- content_for(:title) { 'Change email address' }
 
-- if devise_mapping.confirmable? && resource.pending_reconfirmation?
-  %div Awaiting confirmation for: #{resource.unconfirmed_email}
+- if resource.pending_reconfirmation?
+  %div New email awaiting confirmation: #{resource.unconfirmed_email}
+  %div= link_to 'Resend confirmation email', new_user_reconfirmation_path
+  %hr
 
 = form_for(resource, url: {action: 'update'}) do |f|
+  %div Current email: #{resource.email_was}
   %div<
-    %div= f.label :email
+    %div= f.label :email, 'New email'
     %div= f.email_field :email
     %div= get_error_message_for(resource, :email)
   %div<

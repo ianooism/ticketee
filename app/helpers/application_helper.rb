@@ -5,7 +5,9 @@ module ApplicationHelper
     end
   end
   def get_error_message_for(object, field)
-    message = object.errors.full_messages_for(field).first
+    # if we use full message then we cannot customize input label
+    # message = object.errors.full_messages_for(field).first
+    message = object.errors.messages[field].first
     "Error: #{message}." if message
   end
 end
