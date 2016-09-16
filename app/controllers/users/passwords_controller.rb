@@ -5,10 +5,14 @@ class Users::PasswordsController < DeviseController
   end
   
   def update
+    # override devise
+    if both_passwords_blank?
+      resource.errors.add :password, :blank
+      render 'edit' and return
+    end
     if resource.update_with_password(user_params)
       bypass_sign_in resource
-      flash_key = both_passwords_blank? ? :blank_password : :updated_password
-      set_flash_message :notice, flash_key
+      set_flash_message :notice, :updated_password
       redirect_to edit_user_password_url
     else
       render 'edit'

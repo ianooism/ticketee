@@ -42,10 +42,9 @@ en:
       signed_up_but_unconfirmed: "Welcome! Your account has been created. To activate it, please follow the confirmation instructions sent to your email."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Your account has been updated successfully."
-      updated_email: "Your email has been updated."
-      update_email_needs_confirmation: "Your new email has been stored. To activate it, please follow the confirmation instructions sent to your new email."
-      updated_password: "Your password has been updated."
-      blank_password: "Your new password cannot be blank. Please try again."
+      updated_email: "Email updated."
+      update_email_needs_confirmation: "New email stored. To activate it, please follow the confirmation instructions sent to your new email."
+      updated_password: "Password updated."
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
