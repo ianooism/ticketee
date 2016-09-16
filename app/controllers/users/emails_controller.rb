@@ -8,6 +8,8 @@ class Users::EmailsController < DeviseController
   def update
     if resource.update_with_password(user_params)
       # TODO: logic belongs in model
+      #   if email entered = email in db, remove unconfirmed email
+      #   note that devise has code that keeps email the same even when changed
       resource.update(unconfirmed_email: nil) if update_using_current_email?
       bypass_sign_in resource
       flash_key = resource.pending_reconfirmation? ?
