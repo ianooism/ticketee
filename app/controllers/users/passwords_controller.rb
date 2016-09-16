@@ -1,11 +1,9 @@
 class Users::PasswordsController < DeviseController
   before_action :set_user
   
-  # GET /users/password/edit
   def edit
   end
   
-  # PUT /users/password
   def update
     if resource.update_with_password(user_params)
       bypass_sign_in resource
@@ -23,13 +21,13 @@ class Users::PasswordsController < DeviseController
       @user = current_user
     end
     
+    def user_params
+      params.require(:user).permit(:password, :password_confirmation, :current_password)
+    end
+    
     def both_passwords_blank?
       params[:user][:password].blank? &&
         params[:user][:password_confirmation].blank?
-    end
-    
-    def user_params
-      params.require(:user).permit(:password, :password_confirmation, :current_password)
     end
     
     def translation_scope

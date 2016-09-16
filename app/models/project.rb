@@ -1,6 +1,8 @@
 class Project < ApplicationRecord
   has_many :tickets
   
-  validates :name, presence: true, uniqueness: true
+  alias_attribute :project_name, :name
+  
+  validates :project_name, presence: true, uniqueness: true
   validates :description, presence: true
 end

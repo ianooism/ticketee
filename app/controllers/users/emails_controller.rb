@@ -1,11 +1,9 @@
 class Users::EmailsController < DeviseController
   before_action :set_user
   
-  # GET /users/email/edit
   def edit
   end
   
-  # PUT /users/email
   def update
     previous_unconfirmed_email = resource.unconfirmed_email
     resource.update(unconfirmed_email: nil)

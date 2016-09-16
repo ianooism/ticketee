@@ -3,9 +3,9 @@
 
 = form_for project do |f|
   %div<
-    %div= f.label :name
-    %div= f.text_field :name
-    %div= get_error_message_for(project, :name)
+    %div= f.label :project_name
+    %div= f.text_field :project_name
+    %div= get_error_message_for(project, :project_name)
   %div<
     %div= f.label :description
     %div= f.text_field :description
