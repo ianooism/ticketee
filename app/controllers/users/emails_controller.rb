@@ -7,6 +7,7 @@ class Users::EmailsController < DeviseController
   
   def update
     if resource.update_with_password(user_params)
+      # TODO: logic belongs in model
       resource.update(unconfirmed_email: nil) if update_using_current_email?
       bypass_sign_in resource
       flash_key = resource.pending_reconfirmation? ?

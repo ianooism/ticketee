@@ -1,4 +1,4 @@
-- content_for(:title) { 'Confirm your email' }
+- content_for(:title) { 'Confirm your new email' }
 
 = form_for(resource, url: user_reconfirmation_path, method: :post) do |f|
   - if resource.pending_reconfirmation?
