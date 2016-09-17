@@ -2,8 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
   
-  before_update :remove_unconfirmed_email,
-    unless: Proc.new { |user| user.email_changed? }, prepend: true
+  before_save :remove_unconfirmed_email,
+    unless: Proc.new { |user| user.email_changed? }
   
   validates :full_name, presence: true
   
