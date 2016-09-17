@@ -1,0 +1,5 @@
+- content_for :form_error do
+  %div= get_error_message(resource)
+  -# DEBUG
+  - if resource.errors.any?
+    %div Errors: #{resource.errors.messages}

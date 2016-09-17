@@ -1,4 +1,5 @@
 - content_for(:title) { 'Change email address' }
+= render partial: 'users/form_error'
 
 - if resource.pending_reconfirmation?
   %div New email awaiting confirmation: #{resource.unconfirmed_email}

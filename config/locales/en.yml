@@ -20,4 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    messages:
+      form_unsubmitted: "Please fix the form errors before continuing."
+      confirmation: "%{attribute}s must match"
+      blank: "%{attribute} cannot be blank"
+      too_short:
+        one: "%{attribute} must be at least 1 character"
+        other: "%{attribute} must be at least %{count} characters"
+      taken: "%{attribute} already in use"
+    attributes:
+      current_password:
+        blank: "Password cannot be blank"
+        invalid: "Password is incorrect"

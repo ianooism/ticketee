@@ -1,4 +1,5 @@
 - content_for(:title) { 'Change password' }
+= render partial: 'users/form_error'
 
 = form_for(resource, url: {action: 'update'}) do |f|
   %div<

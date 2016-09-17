@@ -5,12 +5,7 @@ class Users::PasswordsController < DeviseController
   end
   
   def update
-    # override devise
-    if both_passwords_blank?
-      resource.errors.add :password, :blank
-      render 'edit' and return
-    end
-    if resource.update_with_password(user_params)
+    if resource.update_password_with_password(user_params)
       bypass_sign_in resource
       set_flash_message :notice, :updated_password
       redirect_to action: 'edit'
@@ -28,11 +23,6 @@ class Users::PasswordsController < DeviseController
     
     def user_params
       params.require(:user).permit(:password, :password_confirmation, :current_password)
-    end
-    
-    def both_passwords_blank?
-      params[:user][:password].blank? &&
-        params[:user][:password_confirmation].blank?
     end
     
     def translation_scope

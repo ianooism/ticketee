@@ -1,4 +1,5 @@
 - content_for(:title) { 'Confirm your email' }
+= render partial: 'users/form_error'
 
 = form_for(resource, as: resource_name, url: confirmation_path(resource_name), method: :post) do |f|
   %div<

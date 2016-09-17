@@ -1,4 +1,5 @@
 - content_for(:title) { 'Confirm your new email' }
+= render partial: 'users/form_error'
 
 = form_for(resource, url: user_reconfirmation_path, method: :post) do |f|
   - if resource.pending_reconfirmation?
