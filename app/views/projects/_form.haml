@@ -1,5 +1,6 @@
 - content_for :form_error do
-  %div= get_error_message(project)
+  %div= get_error_message_for_form(project)
+  %div= get_errors_if_dev_env(project)
 
 = form_for project do |f|
   %div<

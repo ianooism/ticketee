@@ -1,5 +1,6 @@
 - content_for :form_error do
-  %div= get_error_message(ticket)
+  %div= get_error_message_for_form(ticket)
+  %div= get_errors_if_dev_env(ticket)
 
 = form_for [project, ticket] do |f|
   %div<
