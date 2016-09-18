@@ -14,6 +14,7 @@ class TicketsController < ApplicationController
   
   def create
     @ticket = @project.tickets.new(ticket_params)
+    @ticket.author = current_user
     if @ticket.save
       redirect_to project_url(@project), notice: 'Ticket created.'
     else
