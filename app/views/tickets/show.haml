@@ -1,15 +1,10 @@
-- content_for(:title) { @ticket.name.upcase_first }
-- content_for(:subtitle) { 'tickets#show' }
+- content_for(:title) { @ticket.name }
+- content_for(:subtitle) { @ticket.description }
 
-%div<
-  %div #{@ticket.name}
-  %div #{@ticket.description}
-  %div By: #{@ticket.author.full_name}
+%div Created by: #{@ticket.author.full_name}
 %hr
 - if @ticket.comments.persisted.any?
-  = render @ticket.comments.persisted
-- else
-  %div There are no comments for this ticket.
-%hr
+  %div<
+    = render @ticket.comments.persisted
 %div<
   = render 'comments/form', ticket: @ticket, comment: @comment

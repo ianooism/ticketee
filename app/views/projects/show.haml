@@ -1,18 +1,8 @@
-- content_for(:title) { @project.name.upcase_first }
-- content_for(:subtitle) { 'projects#show' }
+- content_for(:title) { @project.name }
+- content_for(:subtitle) { @project.description }
 
 %div= link_to "New Ticket", new_project_ticket_path(@project)
 %hr
 
 %div<
-  %div= @project.name
-  %div= @project.description
-  %hr
-  - @project.tickets.each do |ticket|
-    %div<
-      %div= ticket.name
-      %div= ticket.description
-      %div= link_to 'Show', project_ticket_path(@project, ticket)
-      %div= link_to 'Edit', edit_project_ticket_path(@project, ticket)
-      %div= link_to 'Destroy', project_ticket_path(@project, ticket), method: :delete
-    %hr
+  = render @project.tickets
