@@ -3,6 +3,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   
   def show
+    @comment = @ticket.comments.new
   end
   
   def new

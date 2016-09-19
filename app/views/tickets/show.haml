@@ -2,5 +2,14 @@
 - content_for(:subtitle) { 'tickets#show' }
 
 %div<
-  %div= @ticket.name
-  %div= @ticket.description
+  %div #{@ticket.name}
+  %div #{@ticket.description}
+  %div By: #{@ticket.author.full_name}
+%hr
+- if @ticket.comments.persisted.any?
+  = render @ticket.comments.persisted
+- else
+  %div There are no comments for this ticket.
+%hr
+%div<
+  = render 'comments/form', ticket: @ticket, comment: @comment

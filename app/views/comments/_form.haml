@@ -1,0 +1,10 @@
+- content_for :form_error do
+  %div= get_error_message_for_form(comment)
+  %div= get_errors_if_dev_env(comment)
+
+= form_for [ticket, comment] do |f|
+  %div<
+    %div= f.label :body, 'New comment'
+    %div= f.text_area :body
+    %div= get_error_message_for(comment, :body)
+  %div= f.submit

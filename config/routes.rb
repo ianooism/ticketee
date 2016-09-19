@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :tickets
   end
   
+  resources :tickets, only: [] do
+    resources :comments
+  end
+  
   devise_for :users, skip: [:registrations, :passwords]
   devise_scope :user do
     namespace :users, as: 'user' do
