@@ -1,10 +1,16 @@
 - content_for(:title) { @ticket.name }
 - content_for(:subtitle) { @ticket.description }
 
-%div Created by: #{@ticket.author.full_name}
+%div By: #{@ticket.author.full_name}
 %hr
+
+%div= link_to 'Back', project_path(@project)
+%div= link_to 'Edit', edit_project_ticket_path(@project, @ticket)
+%div= link_to 'Destroy', project_ticket_path(@project, @ticket), method: :delete
+%hr
+
 - if @ticket.comments.persisted.any?
-  %div<
-    = render @ticket.comments.persisted
-%div<
-  = render 'comments/form', ticket: @ticket, comment: @comment
+  %div Comments
+  = render @ticket.comments.persisted
+
+= render 'comments/form', ticket: @ticket, comment: @comment

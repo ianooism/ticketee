@@ -1,2 +1,4 @@
-%h1= yield :title
-%h2= yield :subtitle
+- if content_for?(:title)
+  %h1= yield :title
+- if content_for?(:subtitle)
+  %h2= yield :subtitle

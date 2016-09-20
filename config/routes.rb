@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   
   resources :tickets, only: [] do
-    resources :comments
+    resources :comments, only: [:create]
   end
   
   devise_for :users, skip: [:registrations, :passwords]

@@ -1,4 +1,9 @@
 - content_for(:title) { 'Edit Ticket' }
-- content_for(:subtitle) { 'tickets#edit' }
+
+%div= link_to 'Back', :back
+%hr
+
+%div #{@project.name}
+%hr
 
 = render partial: 'form', locals: {project: @project, ticket: @ticket}

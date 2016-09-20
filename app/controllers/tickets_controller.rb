@@ -17,7 +17,8 @@ class TicketsController < ApplicationController
     @ticket = @project.tickets.new(ticket_params)
     @ticket.author = current_user
     if @ticket.save
-      redirect_to project_url(@project), notice: 'Ticket created.'
+      flash[:notice] = 'Ticket created.'
+      redirect_to project_ticket_url(@project, @ticket)
     else
       render 'new'
     end
@@ -25,7 +26,8 @@ class TicketsController < ApplicationController
   
   def update
     if @ticket.update(ticket_params)
-      redirect_to edit_project_ticket_url(@project, @ticket), notice: 'Ticket updated.'
+      flash[:notice] = 'Ticket updated.'
+      redirect_to project_ticket_url(@project, @ticket)
     else
       render 'edit'
     end
@@ -33,7 +35,8 @@ class TicketsController < ApplicationController
   
   def destroy
     @ticket.destroy
-    redirect_to project_url(@project), notice: 'Ticket destroyed.'
+    flash[:notice] = 'Ticket destroyed.'
+    redirect_to project_url(@project)
   end
   
   private

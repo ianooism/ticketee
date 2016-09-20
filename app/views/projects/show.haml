@@ -1,8 +1,12 @@
 - content_for(:title) { @project.name }
 - content_for(:subtitle) { @project.description }
 
-%div= link_to "New Ticket", new_project_ticket_path(@project)
+%div= link_to 'Back', projects_url
+%div= link_to 'Edit', edit_project_path(@project)
+%div= link_to 'Destroy', project_path(@project), method: :delete
 %hr
 
-%div<
-  = render @project.tickets
+%div= link_to 'New Ticket', new_project_ticket_path(@project)
+%hr
+
+= render @project.tickets
