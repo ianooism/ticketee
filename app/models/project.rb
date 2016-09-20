@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  has_many :tickets
+  has_many :tickets, dependent: :delete_all
   
   alias_attribute :project_name, :name
   

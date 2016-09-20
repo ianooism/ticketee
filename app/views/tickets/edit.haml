@@ -3,7 +3,7 @@
 %div= link_to 'Back', :back
 %hr
 
-%div #{@project.name}
+%div #{@ticket.project.name}
 %hr
 
-= render partial: 'form', locals: {project: @project, ticket: @ticket}
+= render partial: 'form', locals: {project: @ticket.project, ticket: @ticket}

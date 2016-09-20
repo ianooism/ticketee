@@ -2,10 +2,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
   
+  validates :full_name, presence: true
+  
   before_save :remove_unconfirmed_email, on: :update,
     unless: Proc.new { |user| user.email_changed? }
-  
-  validates :full_name, presence: true
   
   def update_password_with_password(params)
     if params[:password].blank? && params[:password_confirmation].blank?

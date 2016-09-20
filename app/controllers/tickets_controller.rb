@@ -1,52 +1,54 @@
 class TicketsController < ApplicationController
-  before_action :set_project
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  
   def show
+    @ticket = ticket
     @comment = @ticket.comments.new
   end
   
   def new
-    @ticket = @project.tickets.new
+    @ticket = project.tickets.new
   end
   
   def edit
+    @ticket = ticket
   end
   
   def create
-    @ticket = @project.tickets.new(ticket_params)
+    @ticket = project.tickets.new(ticket_params)
+    
     @ticket.author = current_user
+    
     if @ticket.save
-      flash[:notice] = 'Ticket created.'
-      redirect_to project_ticket_url(@project, @ticket)
+      redirect_to(project_ticket_url(@_project, @ticket),
+        notice: 'Ticket created.')
     else
       render 'new'
     end
   end
   
   def update
+    @ticket = ticket
+    
     if @ticket.update(ticket_params)
-      flash[:notice] = 'Ticket updated.'
-      redirect_to project_ticket_url(@project, @ticket)
+      redirect_to(project_ticket_url(@_project, @ticket),
+        notice: 'Ticket updated.')
     else
       render 'edit'
     end
   end
   
   def destroy
-    @ticket.destroy
-    flash[:notice] = 'Ticket destroyed.'
-    redirect_to project_url(@project)
+    ticket.destroy
+    redirect_to project_url(@_project), notice: 'Ticket destroyed.'
   end
   
   private
   
-    def set_project
-      @project = Project.find(params[:project_id])
+    def project
+      @_project = Project.find(params[:project_id])
     end
   
-    def set_ticket
-      @ticket = @project.tickets.find(params[:id])
+    def ticket
+      project.tickets.find(params[:id])
     end
     
     def ticket_params
