@@ -5,14 +5,14 @@ class User < ApplicationRecord
   validates :full_name, presence: true
   
   before_save :remove_unconfirmed_email, on: :update,
-    unless: Proc.new { |user| user.email_changed? }
+    unless: proc { |user| user.email_changed? }
   
   def update_password_with_password(params)
-    if params[:password].blank? && params[:password_confirmation].blank?
-      self.errors.add(:password, :blank)
-      return false
-    else
+    if not params[:password].blank? && params[:password_confirmation].blank?
       update_with_password(params)
+    else
+      self.errors.add(:password, :blank)
+      false
     end
   end
   
