@@ -8,3 +8,5 @@ end
 =end
 
 #User.create!(full_name: 'A A', email: 'a@a', password: 'aaaaaa')
+
+#State.create!([{name: 'New', default: true}, {name: 'Open'}, {name: 'Closed'}])

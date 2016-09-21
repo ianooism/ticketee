@@ -7,4 +7,7 @@
     %div= f.label :body, 'New comment'
     %div= f.text_area :body
     %div= get_error_message_for(comment, :body)
+  %div<
+    %div= f.label :state_id
+    %div= f.collection_select(:state_id, State.order(:id), :id, :name)
   %div= f.submit

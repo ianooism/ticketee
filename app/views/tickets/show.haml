@@ -1,7 +1,9 @@
 - content_for(:title) { @ticket.name }
 - content_for(:subtitle) { @ticket.description }
 
-%div By: #{@ticket.author.full_name}
+%div State: #{@ticket.state.name}
+%div Author: #{@ticket.author.full_name}
+%div Created: #{@ticket.created_at}
 %hr
 
 %div= link_to 'Back', project_path(@ticket.project)
