@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
     @comment.author = current_user
     
     if @comment.save
-      redirect_to(project_ticket_url(@ticket.project, @ticket),
-        notice: 'Comment created.')
+      flash[:notice] = 'Comment created.'
+      redirect_to project_ticket_url(@ticket.project, @ticket)
     else
       render 'tickets/show'
     end
