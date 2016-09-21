@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   def show
     @ticket = ticket
-    @comment = @ticket.comments.new
+    @comment = @ticket.comments.new(state: @ticket.state)
   end
   
   def new

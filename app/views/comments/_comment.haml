@@ -1,4 +1,6 @@
 %div<
   %div #{comment.body}
-  %div #{comment.author.full_name} | #{time_ago_in_words(comment.created_at)} ago
+  %div State: #{comment.state.name}
+  %div Author: #{comment.author.full_name}
+  %div Created: #{time_ago_in_words(comment.created_at)} ago
 %hr

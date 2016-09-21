@@ -6,4 +6,13 @@ class Comment < ApplicationRecord
   validates :body, presence: true
   
   scope :persisted, lambda {where.not(id: nil)}
+  
+  after_create :set_ticket_state
+  
+  private
+  
+    def set_ticket_state
+      ticket.state = state
+      ticket.save!
+    end
 end

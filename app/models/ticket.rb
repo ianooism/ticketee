@@ -10,7 +10,7 @@ class Ticket < ApplicationRecord
   
   before_validation :set_default_state, on: :create
   
-  protected
+  private
   
     def set_default_state
       self.state ||= State.default
