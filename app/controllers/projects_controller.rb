@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   
   def index
-    @projects = Project.all
+    @projects = Project.order(created_at: :desc)
   end
  
   def show
