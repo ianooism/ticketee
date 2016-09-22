@@ -4,6 +4,10 @@ class User < ApplicationRecord
   
   validates :full_name, presence: true
   
+  before_update :remove_unconfirmed_email, prepend: true,
+                unless: proc { |user| user.email_changed? }
+  
+  # extend devise to disallow blank passwords
   def update_password_with_password(params)
     if not params[:password].blank? && params[:password_confirmation].blank?
       update_with_password(params)
@@ -12,9 +16,6 @@ class User < ApplicationRecord
       false
     end
   end
-  
-  before_update :remove_unconfirmed_email, prepend: true,
-    unless: proc { |user| user.email_changed? }
   
   protected
     
