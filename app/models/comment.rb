@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   
   validates :body, presence: true
   
-  scope :persisted, lambda {where.not(id: nil)}
+  scope :saved, -> { where.not(id: nil) }
   
   before_validation :set_previous_state, on: :create
   after_create :set_ticket_state

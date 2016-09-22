@@ -11,8 +11,8 @@
 %div= link_to 'Destroy', project_ticket_path(@ticket.project, @ticket), method: :delete
 %hr
 
-- if @ticket.comments.persisted.any?
+- if @ticket.comments.saved.any?
   %div Comments
-  = render @ticket.comments.persisted
+  = render @ticket.comments.saved
 
 = render 'comments/form', ticket: @ticket, comment: @comment
