@@ -1,11 +1,12 @@
 class Users::PasswordsController < DeviseController
-  before_action :set_user
-  
   def edit
+    @user = current_user
   end
   
   def update
-    if resource.update_password_with_password(user_params)
+    @user = current_user
+    
+    if resource.update_password(user_params)
       bypass_sign_in resource
       set_flash_message :notice, :updated_password
       redirect_to action: 'edit'
@@ -14,15 +15,11 @@ class Users::PasswordsController < DeviseController
     end
   end
   
-  protected
-  
-    def set_user
-      # devise requirement. resource() requires @user to be set
-      @user = current_user
-    end
+  private
     
     def user_params
-      params.require(:user).permit(:password, :password_confirmation, :current_password)
+      params.require(:user).permit(:password, :password_confirmation,
+                                   :current_password)
     end
     
     def translation_scope

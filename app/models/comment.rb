@@ -1,6 +1,4 @@
 class Comment < ApplicationRecord
-  scope :saved, -> { where.not(id: nil) }
-  
   belongs_to :ticket
   after_create :set_state_for_ticket
   
@@ -12,6 +10,8 @@ class Comment < ApplicationRecord
   before_validation :set_previous_state, on: :create
   
   validates :body, presence: true
+  
+  scope :saved, -> { where.not(id: nil) }
   
   private
     def set_state_for_ticket

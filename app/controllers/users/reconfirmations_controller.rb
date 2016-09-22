@@ -1,21 +1,17 @@
 class Users::ReconfirmationsController < DeviseController
-  before_action :set_user
-  
   def new
+    @user = current_user
   end
   
   def create
+    @user = current_user
+    
     resource.send_reconfirmation_instructions
     set_flash_message :notice, :send_instructions
     redirect_to action: 'new'
   end
   
-  protected
-  
-    def set_user
-      # devise requirement. resource() requires @user to be set
-      @user = current_user
-    end
+  private
 
     def translation_scope
       'devise.confirmations'

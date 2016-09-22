@@ -1,15 +1,17 @@
 class Users::EmailsController < DeviseController
-  before_action :set_user
-  
   def edit
+    @user = current_user
+    
     resource.email = nil
   end
   
   def update
+    @user = current_user
+    
     if resource.update_with_password(user_params)
       bypass_sign_in resource
       flash_key = resource.pending_reconfirmation? ?
-        :update_email_needs_confirmation : :updated_email
+                  :update_email_needs_confirmation : :updated_email
       set_flash_message :notice, flash_key
       redirect_to action: 'edit'
     else
@@ -17,12 +19,7 @@ class Users::EmailsController < DeviseController
     end
   end
   
-  protected
-  
-    def set_user
-      # devise requirement. resource() requires @user to be set
-      @user = current_user
-    end
+  private
   
     def user_params
       params.require(:user).permit(:email, :current_password)

@@ -8,7 +8,7 @@ class User < ApplicationRecord
                 unless: proc { |user| user.email_changed? }
   
   # extend devise to disallow blank passwords
-  def update_password_with_password(params)
+  def update_password(params)
     if not params[:password].blank? && params[:password_confirmation].blank?
       update_with_password(params)
     else
