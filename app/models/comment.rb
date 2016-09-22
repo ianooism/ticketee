@@ -9,7 +9,7 @@ class Comment < ApplicationRecord
   scope :saved, -> { where.not(id: nil) }
   
   before_validation :set_previous_state, on: :create
-  after_create :set_ticket_state
+  after_create :set_state_for_ticket
   
   private
   
@@ -17,7 +17,7 @@ class Comment < ApplicationRecord
       self.previous_state = ticket.state
     end
   
-    def set_ticket_state
+    def set_state_for_ticket
       ticket.state = state
       ticket.save!
     end
