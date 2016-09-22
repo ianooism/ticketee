@@ -11,4 +11,8 @@
     %div= f.label :description
     %div= f.text_field :description
     %div= get_error_message_for(ticket, :description)
+  %div<
+    %div= f.label :tag_names
+    %div= f.text_field :tag_names
+    %div= get_error_message_for(ticket, :tag_names)
   %div= f.submit
