@@ -1,6 +1,6 @@
 - content_for(:title) { 'New Ticket' }
 
-%div= link_to 'Back', :back
+%div= link_to 'Back', project_path(@ticket.project)
 %hr
 
 %div #{@ticket.project.name}
