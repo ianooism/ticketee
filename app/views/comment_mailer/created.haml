@@ -1,5 +1,5 @@
 %div Hi #{@user.full_name}
-%div New comment for #{@project.name}/#{@ticket.name}
-%div #{@author.full_name} wrote:
+%div New comment for #{project.name}/#{ticket.name}
+%div #{author.full_name} wrote:
 %div #{@comment.body}
-%div Link: #{project_ticket_url(@project, @ticket)}
+%div Link: #{project_ticket_url(project, ticket)}
