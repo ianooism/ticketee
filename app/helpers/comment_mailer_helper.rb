@@ -6,8 +6,4 @@ module CommentMailerHelper
   def project
     @comment.ticket.project
   end
-  
-  def author
-    @comment.author
-  end
 end
