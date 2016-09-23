@@ -4,9 +4,10 @@
 %div State: #{@ticket.state.name}
 %div Author: #{@ticket.author.full_name}
 %div Created: #{@ticket.created_at}
-%div<
-  = precede 'Tags: ' do
-    = render @ticket.tags
+- if @ticket.tags.any?
+  %div<
+    = precede 'Tags: ' do
+      = render @ticket.tags
 %hr
 
 %div= link_to 'Back', project_path(@ticket.project)

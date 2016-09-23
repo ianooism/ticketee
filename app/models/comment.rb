@@ -1,9 +1,10 @@
 class Comment < ApplicationRecord
-  belongs_to :ticket
-  after_create :set_ticket_state
-  after_create :notify_ticket_subscribers
-  
   belongs_to :author, class_name: :User
+  
+  belongs_to :ticket
+  after_create :set_state_for_ticket
+  after_create :add_author_as_ticket_subscriber
+  after_create :send_notification_to_ticket_subscribers
   
   belongs_to :state
   
@@ -15,11 +16,15 @@ class Comment < ApplicationRecord
   scope :saved, -> { where.not(id: nil) }
   
   private
-    def set_ticket_state
+    def set_state_for_ticket
       ticket.update!(state: state) unless state == previous_state
     end
     
-    def notify_ticket_subscribers
+    def add_author_as_ticket_subscriber
+      ticket.subscribers << author unless ticket.subscribers.include?(author)
+    end
+    
+    def send_notification_to_ticket_subscribers
       (ticket.subscribers - [author]).each do |subscriber|
         CommentMailer.created(self, subscriber).deliver_now
       end
